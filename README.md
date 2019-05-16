@@ -19,7 +19,56 @@
 2. Desarrollar los puntos propuestos en clase disnibles en el enlace anterior.
 
 ## 6. Para la proxima sesion de laboratorio ##
-1. **Entregable**: Estudiar todas las lecciones de los modulos 1, 2, 3 y 4 del curso de sololearn [C tutorial](
-https://www.sololearn.com/Course/C/)
-2. Traer leido el [Interlude: Process API](http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-api.pdf). Compilar todos los codigos de este los cuales se encuentran en el siguiente [enlace](https://github.com/so-udea/ostep-code/tree/master/cpu-api).
+
+**Actividad 1 - Entregable**: Estudiar todas las lecciones de los modulos 1, 2, 3 y 4 del curso de sololearn [C tutorial](https://www.sololearn.com/Course/C/)
+
+**Actividad 2**: Traer leido el [Interlude: Process API](http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-api.pdf). Compilar todos los codigos de este los cuales se encuentran en el siguiente [enlace](https://github.com/so-udea/ostep-code/tree/master/cpu-api).
+ 
+**Actividad 3 - Entregable**: Con base en lo leido, responder las siguientes pregunas:
+1. ¿Que hace la llamada ```fork``` y que devuelve?
+2. ¿Que es un PID y como se obtiene?
+3. ¿Para que sirve la llamada ```wait```?
+4. ¿Que hace la llamada ```exec```, cuantas variaciones de esta existen?
+5. Dado el siguiente codigo:
+
+```C
+#include <unistd.h>
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+  pid_t pid_h1, pid_h2, pid_h3;
+  pid_t pid_n;
+  int i = 0;  
+  pid_h1 = fork();
+  if(pid_h1 == 0) {
+    i++;
+    pid_n = fork();
+    if(pid_n==0) {
+      i++;
+      printf("NIETO: i = %d\n",i);      
+    }else {
+      printf("HIJO 1: i = %d\n",i);      
+    }   
+  }else {
+    pid_h2 = fork();
+    if(pid_h2 == 0) {
+      i++;
+      printf("HIJO 2: i = %d\n",i);   
+    }else {
+      pid_h3 = fork();
+      if(pid_h3 == 0) { 
+         i++;
+         printf("HIJO 3: i = %d\n",i);   
+      }else {  
+         printf("PAPA: i = %d\n",i);   
+      }
+    }
+  }
+  return 0;
+}
+```
+Responda las siguientes preguntas:
+  1. ¿Cuantos hijos tiene cada uno de los procesos anteriormente creados?
+  2. ¿Cual proceso se acaba primero?
+  3. ¿La variable i es la misma para todos los procesos?, ¿Cual es su valor?
 
